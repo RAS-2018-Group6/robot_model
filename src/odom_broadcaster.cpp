@@ -4,51 +4,59 @@
 
 
 
+class OdomBroadcaster
+{
+public:
+	ros::NodeHandle node;
+	ros::Subscriber sub_odom;
+	tf::TransformBroadcaster br;
+	tf::Transform transform;
 
-// Should subscribe to dead reckoning node
 
+	OdomBroadcaster(){
+	  ros::init(argc, argv, "position_broadcaster");
+	  ros::Rate loop_rate(10);
 
-void odomCallback(const geometry_msgs::Pose::ConstPtr& msg){
-
-    x = msg->position.x;
-    y = msg->position.y;
-    phi = msg->orientation.z;
+	  sub_odom = n.subscribe<geometry_msgs::Pose>("/odom",10,&OdomBroadcaster::odomCallback,this);
 
 }
 
-int main(int argc, char** argv){
-
-  ros::init(argc, argv, "position_broadcaster");
-
-  ros::NodeHandle node;
-  ros::Rate loop_rate(10);
-
-  static tf::TransformBroadcaster br;
-  tf::Transform transform;
-
-  sub_odom = n.subscribe<geometry_msgs::Pose>("/odom",10,odomCallback);
 
 
+	void odomCallback(const geometry_msgs::Pose::ConstPtr& msg){
+		ROS_INFO("I heard : x:[%f],y:[%f],phi:[%f]", x,y,phi);
+		x = msg->position.x;
+		y = msg->position.y;
+		phi = msg->orientation.z;
 
-  float x = 0;
-  float y = 0;
+		transform.setOrigin(tf::Vector3( x, y, 0.0));
+	        tf::Quaternion q;
+	        q.setRPY(0, 0, phi);
+	        transform.setRotation(q);
 
-  while(ros::ok()){
-      ROS_INFO("I heard : x:[%f]  y:[%f]", x,y);
+	        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "odom", "base_link"));
 
-      transform.setOrigin(tf::Vector3( x, y, 0.0));
-      tf::Quaternion q;
-      q.setRPY(0, 0, 3);
-      transform.setRotation(q);
+	}
 
-      br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "odom", "base_link"));
 
-      // change position just to show in rviz. Should be changed acording to /odom topic
-      x = x+0.2;
-      y = y+0.2;
-      loop_rate.sleep();
+private:
+	float x;
+	float y;
+	float phi;
 
-  }
 
-  return 0;
-};
+	int main(int argc, char** argv){
+
+		ros::Rate loop_rate(20);
+
+	  while(ros::ok()){
+	      
+		ros::spinOnce();
+	        loop_rate.sleep();
+
+	  }
+
+	  return 0;
+	}
+
+}
