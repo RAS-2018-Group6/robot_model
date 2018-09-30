@@ -10,7 +10,7 @@ int main( int argc, char** argv )
   ros::NodeHandle n;
   ros::Rate r(1);
   ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
-
+  ros::Rate loop_rate(20);
 
   visualization_msgs::Marker marker;
   // Set the frame ID and timestamp.  See the TF tutorials for information on these.
@@ -100,7 +100,7 @@ int main( int argc, char** argv )
         return 0;
       }
       ROS_WARN_ONCE("Please create a subscriber to the marker");
-      sleep(1);
+      loop_rate.sleep();
     }
     marker_pub.publish(marker);
 
