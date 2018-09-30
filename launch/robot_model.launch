@@ -1,0 +1,13 @@
+
+<launch>
+  
+  <!-- odom placement -->
+  <node pkg="tf" type="static_transform_publisher" name="robot_model_link"
+        args="0 0 0 0 0 0  /map /odom 100" />
+
+  <!-- lidar placement -->
+  <node pkg="tf" type="static_transform_publisher" name="lidar_link"
+        args="0 0 0 0 0 0  /base_link /lidar 100" />
+  
+
+</launch>
