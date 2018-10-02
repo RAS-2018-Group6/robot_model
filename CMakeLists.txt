@@ -20,3 +20,6 @@ target_link_libraries(base_link_model ${catkin_LIBRARIES})
 add_executable(broadcast_position src/pos_broadcaster.cpp)
 target_link_libraries(broadcast_position ${catkin_LIBRARIES})
 
+add_executable(broadcast_odom src/odom_broadcaster.cpp)
+target_link_libraries(broadcast_odom ${catkin_LIBRARIES})
+
