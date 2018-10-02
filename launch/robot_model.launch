@@ -3,11 +3,16 @@
   
   <!-- odom placement -->
   <node pkg="tf" type="static_transform_publisher" name="robot_model_link"
-        args="0 0 0 0 0 0  /map /odom 10" />
+        args="0 0 0 0 0 0  /map /odom 100" />
 
   <!-- lidar placement -->
   <node pkg="tf" type="static_transform_publisher" name="lidar_link"
-        args="0 0 0 0 0 0  /base_link /laser 10" />
+        args="0 0 0 0 0 0  /base_link /lidar 100" />
   
+  <node pkg="rviz" type="rviz" name="rviz" />
+
+  <node pkg="robot_model" type="base_link_model" name="base_link_model" />
+
+  <node pkg="robot_model" type="broadcast_odom" name="tf_odom_brodcaster" />
 
 </launch>
