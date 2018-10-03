@@ -16,9 +16,9 @@ public:
 	OdomBroadcaster(){
 
 
-		node = ros::NodeHandle("~");
+		node = ros::NodeHandle("robot_motors");
 		//ros::Rate loop_rate(10);
-	  sub_odom = node.subscribe<geometry_msgs::Pose>("robot_motors/odom",10,&OdomBroadcaster::odomCallback,this);
+	  sub_odom = node.subscribe<geometry_msgs::Pose>("/odom",10,&OdomBroadcaster::odomCallback,this);
 
 }
 
@@ -50,7 +50,7 @@ private:
 };
 
 int main(int argc, char** argv){
-	ros::init(argc, argv, "position_broadcaster");
+	ros::init(argc, argv, "odom_broadcaster");
 
 	OdomBroadcaster odom_bc;
 	ros::Rate loop_rate(20);
