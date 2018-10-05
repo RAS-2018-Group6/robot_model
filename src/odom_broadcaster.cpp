@@ -25,12 +25,12 @@ public:
 
 
 	void odomCallback(const geometry_msgs::Pose::ConstPtr& msg){
-		ROS_INFO("I heard : x:[%f],y:[%f],phi:[%f]", x,y,phi);
-		x = msg->position.x;
-		y = msg->position.y;
-		phi = msg->orientation.z;
+					ROS_INFO("I heard : x:[%f],y:[%f],phi:[%f]", x,y,phi);
+					x = msg->position.x;
+					y = msg->position.y;
+					phi = msg->orientation.z;
 
-		transform.setOrigin(tf::Vector3( x, y, 0.0));
+					transform.setOrigin(tf::Vector3( x, y, 0.0));
 	        tf::Quaternion q;
 	        q.setRPY(0, 0, phi);
 	        transform.setRotation(q);
