@@ -8,7 +8,6 @@ int main( int argc, char** argv )
 {
   ros::init(argc, argv, "robot_model");
   ros::NodeHandle n;
-  ros::Rate r(1);
   ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
   ros::Rate loop_rate(20);
 
@@ -104,7 +103,5 @@ int main( int argc, char** argv )
     }
     marker_pub.publish(marker);
 
-    r.sleep();
   }
 }
-
