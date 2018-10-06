@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(robot_model)
 
-find_package(catkin REQUIRED COMPONENTS roscpp visualization_msgs tf)
+find_package(catkin REQUIRED COMPONENTS roscpp visualization_msgs tf nav_msgs)
 
 catkin_package(
   DEPENDS
@@ -22,4 +22,3 @@ target_link_libraries(broadcast_position ${catkin_LIBRARIES})
 
 add_executable(broadcast_odom src/odom_broadcaster.cpp)
 target_link_libraries(broadcast_odom ${catkin_LIBRARIES})
-
