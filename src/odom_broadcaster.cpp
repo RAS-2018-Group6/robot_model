@@ -1,6 +1,7 @@
 #include <ros/ros.h>
 #include <tf/transform_broadcaster.h>
 #include <geometry_msgs/Pose.h>
+#include <nav_msgs/Odometry.h>
 
 
 
@@ -18,24 +19,24 @@ public:
 
 		node = ros::NodeHandle("robot_motors");
 		//ros::Rate loop_rate(10);
-	  sub_odom = node.subscribe<geometry_msgs::Pose>("/odom",10,&OdomBroadcaster::odomCallback,this);
+	  sub_odom = node.subscribe<nav_msgs::Odometry>("/odom",10,&OdomBroadcaster::odomCallback,this);
 
 }
 
 
 
-	void odomCallback(const geometry_msgs::Pose::ConstPtr& msg){
-					ROS_INFO("I heard : x:[%f],y:[%f],phi:[%f]", x,y,phi);
-					x = msg->position.x;
-					y = msg->position.y;
-					phi = msg->orientation.z;
+	void odomCallback(const nav_msgs::Odometry::ConstPtr& msg){
+					//ROS_INFO("I heard : x:[%f],y:[%f],phi:[%f]", x,y,phi);
+					//x = msg->position.x;
+					//y = msg->position.y;
+					//phi = msg->orientation.z;
 
-					transform.setOrigin(tf::Vector3( x, y, 0.0));
-	        tf::Quaternion q;
-	        q.setRPY(0, 0, phi);
-	        transform.setRotation(q);
+					//transform.setOrigin(tf::Vector3( x, y, 0.0));
+	        //tf::Quaternion q;
+	        //q.setRPY(0, 0, phi);
+	        //transform.setRotation(q);
 
-	        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "odom", "base_link"));
+	        //br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "odom", "base_link"));
 
 	}
 
