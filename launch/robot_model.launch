@@ -7,10 +7,10 @@
 
   <!-- lidar placement -->
   <node pkg="tf" type="static_transform_publisher" name="lidar_link"
-        args="0 0 0 3.14 0 0  /base_link /laser 10" />
+        args="-0.08 0 0 3.14 0 0  /base_link /laser 10" />
 
   <node pkg="tf" type="static_transform_publisher" name="camera_link"
-        args="0.15 0 0.195 0 0.61 0  /base_link /camera_link 10" />
+        args="0.15 0 0.205 0 0.61 0  /base_link /camera_link 10" />
 
   <node pkg="rviz" type="rviz" name="rviz" args="-d $(find robot_model)/config/robot_model.rviz"/>
 
