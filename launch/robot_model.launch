@@ -9,6 +9,12 @@
   <node pkg="tf" type="static_transform_publisher" name="lidar_link"
         args="-0.08 0 0 3.14 0 0  /base_link /laser 10" />
 
+  <!-- Base_link placement -->
+
+  <node pkg="tf" type="static_transform_publisher" name="base_link"
+        args="0.2 0.3 0 1.57 0 0  /map /camera_link 10" />
+
+  <!-- Camera placement -->
   <node pkg="tf" type="static_transform_publisher" name="camera_link"
         args="0.15 0 0.215 0 0.87 0  /base_link /camera_link 10" />
 
