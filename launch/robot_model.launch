@@ -12,7 +12,7 @@
 
   <!-- Camera placement -->
   <node pkg="tf" type="static_transform_publisher" name="camera_link"
-        args="0.15 0 0.215 0 0.87 0  /base_link /camera_link 10" />
+        args="0.1 0 0.20 0 0.62 0  /base_link /camera_link 10" />
 
   <node pkg="rviz" type="rviz" name="rviz" args="-d $(find robot_model)/config/robot_model.rviz"/>
 
